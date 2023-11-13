@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+from openpyxl import load_workbook
+
+data_file = 'postes.xlsx'
+
+# Load the entire workbook.
+wb = load_workbook(data_file)
+
+# List all the sheets in the file.
+print("Found the following worksheets:")
+for sheetname in wb.sheetnames:
+    print(sheetname)
+# Load one worksheet.
+ws = wb['TESTS']
+all_rows = list(ws.rows)
+
+print(f"Found {len(all_rows)} rows of data.")
+#file = open("output", "w")
+#create script 
+#declaring object du type address
+print(f"config firewall address")
+for row in all_rows[1:21]:
+    host = str(row[2].value).strip()
+    ipaddr = str(row[5].value).strip()
+    print(f"edit address {host}_Administration")
+    print(f"set ipaddress {ipaddr} 255.255.255.255")
+    print(f"next")
+print(f"end")
+#file.close()
+#ajout de membresau groupe admin_FW
+print(f"config firewall addrgrp")
+print("edit admin_FW")
+for row in all_rows[1:21]:
+   host = str(row[2].value).strip()
+   print(f"append member {host}_Administration")
+print(f"end") 
